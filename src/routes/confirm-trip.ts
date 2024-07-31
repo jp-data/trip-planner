@@ -1,12 +1,12 @@
+import dayjs from "dayjs";
+import 'dayjs/locale/pt-br';
+import localizedFormat from "dayjs/plugin/localizedFormat";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { z } from 'zod'
-import { prisma } from '../lib/prisma'
-import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat"
-import 'dayjs/locale/pt-br'
+import nodemailer from 'nodemailer';
+import { z } from 'zod';
 import { getMailClient } from "../lib/mail";
-import nodemailer from 'nodemailer'
+import { prisma } from '../lib/prisma';
 
 dayjs.locale('pt-br')
 dayjs.extend(localizedFormat)
@@ -47,7 +47,7 @@ export async function confirmTrip(app: FastifyInstance) {
 
         await Promise.all([
             trip?.participants.map(async(participant) => {
-                const confirmationLink = `htttp://localhost:3333/trips/${trip.id}/confirm/${participant.id}`
+                const confirmationLink = `htttp://localhost:3333/participants/${participant.id}/confirm`
                 const message = await mail.sendMail({
                     from: {
                         name: 'Equipe planner 4you',

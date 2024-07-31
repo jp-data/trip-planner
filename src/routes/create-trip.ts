@@ -1,12 +1,12 @@
+import dayjs from "dayjs";
+import 'dayjs/locale/pt-br';
+import localizedFormat from "dayjs/plugin/localizedFormat";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { z } from 'zod'
-import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat"
-import 'dayjs/locale/pt-br'
-import { prisma } from "../lib/prisma";
+import nodemailer from 'nodemailer';
+import { z } from 'zod';
 import { getMailClient } from "../lib/mail";
-import nodemailer from 'nodemailer'
+import { prisma } from "../lib/prisma";
 
 dayjs.locale('pt-br')
 dayjs.extend(localizedFormat)
